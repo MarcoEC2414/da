@@ -6,6 +6,8 @@ const envSchema = z.object({
   NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
   RATE_LIMIT_PER_MIN: z.coerce.number().int().positive().default(120),
   MONGODB_URI: z.string().url().optional(),
+  // Origen permitido del frontend en producción (CORS). Ej.: https://cloudcalc.onrender.com
+  FRONTEND_URL: z.string().url().optional(),
   SIMULATE_LATENCY_MS: z.coerce.number().int().min(0).default(400),
   SIMULATE_ERROR_RATE: z.coerce.number().min(0).max(1).default(0),
   // Deprecados (integración Google Cloud a AWS queda desactivada): se conservan

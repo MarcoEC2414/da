@@ -10,6 +10,17 @@ export function mongoConfigured(): boolean {
 }
 
 /**
+ * Estado de la conexión para GET /api/health. Nunca expone la URI ni credenciales.
+ * - not-configured: no hay MONGODB_URI (el backend usa los JSON locales).
+ * - connected:      hay una conexión activa a Atlas.
+ * - disconnected:   MONGODB_URI está definida pero no se pudo conectar.
+ */
+export function mongoStatus(): 'not-configured' | 'connected' | 'disconnected' {
+  if (!MONGO_AVAILABLE) return 'not-configured';
+  return db ? 'connected' : 'disconnected';
+}
+
+/**
  * Devuelve la conexión a MongoDB Atlas (simulando el "servidor de catálogos de
  * AWS"). Si no está configurada, devuelve null y el backend usa los JSON locales.
  */

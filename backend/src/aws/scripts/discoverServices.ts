@@ -9,7 +9,9 @@ async function run() {
   let nextToken: string | undefined = undefined;
   const services: { code: string; count: number }[] = [];
   do {
-    const res = await client.send(new DescribeServicesCommand({ NextToken: nextToken }));
+    // Anotación explícita: evita la inferencia circular de TS sobre el bucle NextToken.
+    const res: { Services?: { ServiceCode?: string; AttributeNames?: string[] }[]; NextToken?: string } =
+      await client.send(new DescribeServicesCommand({ NextToken: nextToken }));
     if (res.Services) {
       services.push(...res.Services.map(s => ({ code: s.ServiceCode ?? '', count: s.AttributeNames?.length ?? 0 })));
     }

@@ -12,7 +12,7 @@ import { convertRegionQuotes, toCurrencyQuote } from '../data/fx';
 import { ec2OperatingSystem } from '../data/awsServices';
 import { REGIONS } from '../data/regions';
 
-const API_BASE = (import.meta.env.VITE_API_BASE ?? '/api').replace(/\/$/, '');
+const API_BASE = (import.meta.env.VITE_API_URL ?? import.meta.env.VITE_API_BASE ?? '/api').replace(/\/$/, '');
 
 async function post<T>(path: string, body: unknown): Promise<T> {
   const res = await fetch(`${API_BASE}${path}`, {
@@ -75,7 +75,7 @@ export class HttpPricingProvider implements PricingProvider {
   }
 
   private async getEc2Quote(service: CloudService, region: string, currency: Currency): Promise<ServiceQuote> {
-    const result = await post<Ec2EstimateResponse>('/api/aws/ec2/estimate', {
+    const result = await post<Ec2EstimateResponse>('/aws/ec2/estimate', {
       instanceType: String(service.spec.instanceType ?? ''),
       region,
       operatingSystem: ec2OperatingSystem(service.spec.os),
@@ -115,7 +115,7 @@ export class HttpPricingProvider implements PricingProvider {
 
     let ec2Quotes: Ec2RegionPrice[] | null = null;
     if (ec2) {
-      const ec2Res = await post<Ec2RegionsResponse>('/api/aws/ec2/regions', {
+      const ec2Res = await post<Ec2RegionsResponse>('/aws/ec2/regions', {
         instanceType: String(ec2.spec.instanceType ?? ''),
         operatingSystem: ec2OperatingSystem(ec2.spec.os),
         quantity: toBoundedInt(ec2.spec.instanceCount, 1),

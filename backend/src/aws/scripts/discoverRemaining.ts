@@ -6,8 +6,30 @@ dotenv.config();
 
 const client = new PricingClient({ region: 'us-east-1' });
 
-function parseItem(raw: unknown) {
-  return JSON.parse(String(raw));
+interface PriceDimension {
+  unit?: string;
+  pricePerUnit?: { USD?: string };
+  description?: string;
+  beginRange?: string;
+  endRange?: string;
+}
+interface Offer {
+  priceDimensions?: Record<string, PriceDimension>;
+}
+interface Product {
+  product: { sku?: string; productFamily?: string; attributes: Record<string, string | undefined> };
+  terms?: { OnDemand?: Record<string, Offer> };
+}
+
+function parseItem(raw: unknown): Product {
+  return JSON.parse(String(raw)) as Product;
+}
+
+/** priceDimensions de la primera oferta OnDemand del producto. */
+function firstPriceDimensions(item: Product): Record<string, PriceDimension> | undefined {
+  const onDemand: Record<string, Offer> = item.terms?.OnDemand ?? {};
+  const firstOffer = (Object.values(onDemand) as Offer[])[0];
+  return firstOffer?.priceDimensions;
 }
 
 async function run() {
@@ -36,7 +58,7 @@ async function run() {
   if (s3Products.PriceList?.[0]) {
     const item = parseItem(s3Products.PriceList[0]);
     fs.writeFileSync(path.join(docsDir, 'aws-s3-sample.json'), JSON.stringify(item, null, 2));
-    const dims = Object.values(item.terms?.OnDemand || {})[0]?.priceDimensions;
+    const dims = firstPriceDimensions(item);
     console.log('S3 dimensions:', Object.values(dims || {}).map((d: any) => ({
       desc: d.description,
       unit: d.unit,
@@ -65,7 +87,7 @@ async function run() {
   console.log('Lambda products found in us-east-1:', lambdaProducts.PriceList?.length);
   for (const raw of lambdaProducts.PriceList || []) {
     const item = parseItem(raw);
-    const dims = Object.values(item.terms?.OnDemand || {})[0]?.priceDimensions;
+    const dims = firstPriceDimensions(item);
     console.log('Lambda item group:', item.product.attributes.group, 'usagetype:', item.product.attributes.usagetype);
     console.log(' dims:', Object.values(dims || {}).map((d: any) => ({
       desc: d.description,
@@ -116,7 +138,7 @@ async function run() {
   console.log('SNS products found in us-east-1:', snsProducts.PriceList?.length);
   for (const raw of snsProducts.PriceList || []) {
     const item = parseItem(raw);
-    const dims = Object.values(item.terms?.OnDemand || {})[0]?.priceDimensions;
+    const dims = firstPriceDimensions(item);
     console.log('SNS group:', item.product.attributes.group, 'usagetype:', item.product.attributes.usagetype);
     console.log(' dims:', Object.values(dims || {}).map((d: any) => ({
       desc: d.description,
@@ -140,7 +162,7 @@ async function run() {
   console.log('CloudFront Data Transfer products found:', cfProducts.PriceList?.length);
   for (const raw of cfProducts.PriceList || []) {
     const item = parseItem(raw);
-    const dims = Object.values(item.terms?.OnDemand || {})[0]?.priceDimensions;
+    const dims = firstPriceDimensions(item);
     console.log('CF loc:', item.product.attributes.location, 'transferType:', item.product.attributes.transferType, 'usagetype:', item.product.attributes.usagetype);
     console.log(' dims count:', Object.keys(dims || {}).length);
     if (!fs.existsSync(path.join(docsDir, 'aws-cloudfront-sample.json'))) {
@@ -157,7 +179,7 @@ async function run() {
   console.log('Route53 products found:', r53Products.PriceList?.length);
   for (const raw of r53Products.PriceList || []) {
     const item = parseItem(raw);
-    const dims = Object.values(item.terms?.OnDemand || {})[0]?.priceDimensions;
+    const dims = firstPriceDimensions(item);
     console.log('R53 family:', item.product.productFamily, 'usagetype:', item.product.attributes.usagetype);
     console.log(' dims:', Object.values(dims || {}).map((d: any) => ({
       desc: d.description,

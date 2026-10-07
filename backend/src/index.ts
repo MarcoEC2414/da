@@ -1,7 +1,9 @@
 import express, { type ErrorRequestHandler } from 'express';
+import cors from 'cors';
 import rateLimit from 'express-rate-limit';
 import { env } from './config/env';
 import { getCatalogStatus, getCatalogMeta } from './aws/awsCatalog';
+import { mongoStatus } from './db/mongo';
 import { requestLogger } from './middleware/requestLogger';
 import { errorHandler } from './middleware/errorHandler';
 import { pricingRouter } from './routes/pricing';
@@ -11,8 +13,21 @@ import { ec2RegionsRouter } from './routes/ec2Regions';
 
 const app = express();
 app.disable('x-powered-by');
-app.set('trust proxy', false);
+// En producción (Render) las peticiones llegan a través del proxy de Render:
+// con trust proxy la IP real del cliente se usa en el rate limit.
+// En desarrollo sigue desactivado para no confiar en X-Forwarded-For local.
+app.set('trust proxy', env.NODE_ENV === 'production' ? 1 : false);
 app.use(express.json({ limit: '64kb' }));
+
+/**
+ * CORS con lista blanca: desarrollo local (Vite) + la URL del frontend de
+ * producción proporcionada mediante FRONTEND_URL. Nunca '*' en producción.
+ * Las peticiones sin cabecera Origin (curl, server-to-server) no requieren CORS.
+ */
+const allowedOrigins = ['http://localhost:5173', env.FRONTEND_URL].filter(
+  (origin): origin is string => typeof origin === 'string' && origin.length > 0
+);
+app.use(cors({ origin: allowedOrigins }));
 
 app.use(
   rateLimit({
@@ -28,7 +43,11 @@ app.use(
 app.use(requestLogger);
 
 app.get('/api/health', async (_req, res) => {
-  res.json({ ok: true, ...(await getCatalogStatus()), ...(await getCatalogMeta()) });
+  const status = await getCatalogStatus();
+  const meta = await getCatalogMeta();
+  // getCatalogStatus ya intentó la conexión a Atlas; mongoStatus solo reporta el
+  // estado resultante (sin URI ni credenciales).
+  res.json({ ok: true, ...status, database: mongoStatus(), ...meta });
 });
 
 app.use('/api/pricing', pricingRouter);
@@ -50,8 +69,10 @@ app.use(bodyParserError);
 app.use(errorHandler);
 
 if (env.NODE_ENV !== 'test') {
-  app.listen(env.PORT, () => {
-    console.log(`Backend de CloudCalc (simulación AWS) escuchando en http://localhost:${env.PORT}`);
+  // 0.0.0.0 obligatorio en Render (contenedor); local también funciona con él.
+  const port = Number(process.env.PORT) || env.PORT;
+  app.listen(port, '0.0.0.0', () => {
+    console.log(`Backend de CloudCalc escuchando en http://0.0.0.0:${port} (NODE_ENV=${env.NODE_ENV})`);
   });
 }
 

@@ -1,0 +1,59 @@
+# Blueprint de Render para CloudCalc (monorepo).
+#   - Web Service : backend (Express) en rootDir backend.
+#   - Static Site : frontend (Vite) en rootDir frontend, publicado en dist.
+# Las variables con sync: false NO se guardan aquí: se rellenan en el dashboard
+# de Render (Settings > Environment) tras crear los servicios. Nunca versiones
+# secretos en este archivo.
+#
+# Orden recomendado:
+#   1) Crear el blueprint (o el Web Service) y copiar su URL pública.
+#   2) Rellenar en el backend: FRONTEND_URL (URL del static site) y los secretos.
+#   3) Rellenar en el static site: VITE_API_URL (URL del backend + /api) y redeploy.
+
+services:
+  - type: web
+    name: cloudcalc-backend
+    runtime: node
+    rootDir: backend
+    plan: free
+    autoDeploy: true
+    buildCommand: npm ci && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      # Simulación desactivada en producción (respuestas inmediatas y sin errores artificiales).
+      - key: SIMULATE_LATENCY_MS
+        value: '0'
+      - key: SIMULATE_ERROR_RATE
+        value: '0'
+      - key: RATE_LIMIT_PER_MIN
+        value: '120'
+      # URL del frontend permitida por CORS (https://<nombre-del-static-site>.onrender.com).
+      - key: FRONTEND_URL
+        sync: false
+      # MongoDB Atlas (opcional). Sin ella el backend usa el catálogo JSON local.
+      - key: MONGODB_URI
+        sync: false
+      # Requeridas para precios reales de EC2 (/api/aws/ec2/*); sin ellas -> 503.
+      - key: AWS_ACCESS_KEY_ID
+        sync: false
+      - key: AWS_SECRET_ACCESS_KEY
+        sync: false
+
+staticSites:
+  - type: static
+    name: cloudcalc
+    rootDir: frontend
+    plan: free
+    autoDeploy: true
+    buildCommand: npm ci && npm run build
+    staticPublishPath: dist
+    envVars:
+      # Usa el backend real en lugar del catálogo mock.
+      - key: VITE_PRICING_PROVIDER
+        value: http
+      # URL absoluta del backend terminada en /api (sobreescribe VITE_API_BASE en el build).
+      - key: VITE_API_URL
+        sync: false

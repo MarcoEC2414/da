@@ -3,7 +3,7 @@ import rates from '../../../shared/awsRates.json';
 import { REGIONS } from '../data/regions';
 import { SERVICE_DEFINITIONS } from '../data/awsServices';
 
-const API_BASE = (import.meta.env.VITE_API_BASE ?? '/api').replace(/\/$/, '');
+const API_BASE = (import.meta.env.VITE_API_URL ?? import.meta.env.VITE_API_BASE ?? '/api').replace(/\/$/, '');
 
 export interface CatalogInfo {
   ok: boolean;
