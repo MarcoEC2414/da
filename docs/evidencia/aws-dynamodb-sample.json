@@ -1,0 +1,44 @@
+{
+  "product": {
+    "productFamily": "Amazon DynamoDB PayPerRequest Throughput",
+    "attributes": {
+      "regionCode": "us-east-1",
+      "tableclass": "Standard",
+      "servicecode": "AmazonDynamoDB",
+      "groupDescription": "DynamoDB PayPerRequest Vector Write Request",
+      "usagetype": "VectorWriteRequest",
+      "locationType": "AWS Region",
+      "location": "US East (N. Virginia)",
+      "servicename": "Amazon DynamoDB",
+      "operation": "",
+      "group": "DDB-VectorWriteRequest"
+    },
+    "sku": "2725NFNZDUK4Z7ZV"
+  },
+  "serviceCode": "AmazonDynamoDB",
+  "terms": {
+    "OnDemand": {
+      "2725NFNZDUK4Z7ZV.JRTCKXETXF": {
+        "priceDimensions": {
+          "2725NFNZDUK4Z7ZV.JRTCKXETXF.6YS6EN2CT7": {
+            "unit": "GB",
+            "endRange": "Inf",
+            "description": "$0.52 per GB of vector write requests in US East (N. Virginia)",
+            "appliesTo": [],
+            "rateCode": "2725NFNZDUK4Z7ZV.JRTCKXETXF.6YS6EN2CT7",
+            "beginRange": "0",
+            "pricePerUnit": {
+              "USD": "0.5200000000"
+            }
+          }
+        },
+        "sku": "2725NFNZDUK4Z7ZV",
+        "effectiveDate": "2026-08-01T00:00:00Z",
+        "offerTermCode": "JRTCKXETXF",
+        "termAttributes": {}
+      }
+    }
+  },
+  "version": "20260911124422",
+  "publicationDate": "2026-09-11T12:44:22Z"
+}

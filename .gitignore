@@ -1,0 +1,11 @@
+node_modules
+dist
+build
+*.log
+
+# Secretos: NUNCA se versionan
+.env
+.env.*
+!.env.example
+# frontend/.env solo contiene VITE_PRICING_PROVIDER y VITE_API_BASE (sin secretos)
+!frontend/.env

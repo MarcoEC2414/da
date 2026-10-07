@@ -1,0 +1,45 @@
+{
+  "product": {
+    "productFamily": "Data Transfer",
+    "attributes": {
+      "fromLocationType": "AWS Edge Location",
+      "toRegionCode": "",
+      "servicecode": "AmazonCloudFront",
+      "usagetype": "ZA-DataTransfer-Out-OBytes",
+      "fromRegionCode": "",
+      "transferType": "CloudFront to Origin",
+      "servicename": "Amazon CloudFront",
+      "fromLocation": "South Africa",
+      "toLocationType": "Other",
+      "toLocation": "Data Origin",
+      "operation": ""
+    },
+    "sku": "272YGRMFJS3Z4CKG"
+  },
+  "serviceCode": "AmazonCloudFront",
+  "terms": {
+    "OnDemand": {
+      "272YGRMFJS3Z4CKG.JRTCKXETXF": {
+        "priceDimensions": {
+          "272YGRMFJS3Z4CKG.JRTCKXETXF.6YS6EN2CT7": {
+            "unit": "GB",
+            "endRange": "Inf",
+            "description": "$0.060 per GB - All data transfer out to Origin (South Africa)",
+            "appliesTo": [],
+            "rateCode": "272YGRMFJS3Z4CKG.JRTCKXETXF.6YS6EN2CT7",
+            "beginRange": "0",
+            "pricePerUnit": {
+              "USD": "0.0600000000"
+            }
+          }
+        },
+        "sku": "272YGRMFJS3Z4CKG",
+        "effectiveDate": "2026-10-01T00:00:00Z",
+        "offerTermCode": "JRTCKXETXF",
+        "termAttributes": {}
+      }
+    }
+  },
+  "version": "20261003000426",
+  "publicationDate": "2026-10-03T00:04:26Z"
+}

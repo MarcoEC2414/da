@@ -1,0 +1,10 @@
+[
+  { "id": "e2-small", "label": "e2-small · 2 vCPU · 2 GB", "vCpu": 2, "memoryGb": 2, "family": "e2" },
+  { "id": "e2-standard-2", "label": "e2-standard-2 · 2 vCPU · 8 GB", "vCpu": 2, "memoryGb": 8, "family": "e2" },
+  { "id": "e2-standard-4", "label": "e2-standard-4 · 4 vCPU · 16 GB", "vCpu": 4, "memoryGb": 16, "family": "e2" },
+  { "id": "e2-standard-8", "label": "e2-standard-8 · 8 vCPU · 32 GB", "vCpu": 8, "memoryGb": 32, "family": "e2" },
+  { "id": "n2-standard-4", "label": "n2-standard-4 · 4 vCPU · 16 GB", "vCpu": 4, "memoryGb": 16, "family": "n2" },
+  { "id": "n2-standard-8", "label": "n2-standard-8 · 8 vCPU · 32 GB", "vCpu": 8, "memoryGb": 32, "family": "n2" },
+  { "id": "n2-highmem-4", "label": "n2-highmem-4 · 4 vCPU · 32 GB", "vCpu": 4, "memoryGb": 32, "family": "n2" },
+  { "id": "c2-standard-4", "label": "c2-standard-4 · 4 vCPU · 16 GB", "vCpu": 4, "memoryGb": 16, "family": "c2" }
+]

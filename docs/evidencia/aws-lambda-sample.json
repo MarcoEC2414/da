@@ -1,0 +1,42 @@
+{
+  "product": {
+    "productFamily": "Serverless",
+    "attributes": {
+      "regionCode": "us-east-1",
+      "servicecode": "AWSLambda",
+      "usagetype": "Lambda-Managed-Instances-c7i.8xlarge-Management-Hours",
+      "locationType": "AWS Region",
+      "location": "US East (N. Virginia)",
+      "servicename": "AWS Lambda",
+      "lambdaManagedInstanceType": "c7i.8xlarge",
+      "operation": ""
+    },
+    "sku": "227MB7Z6QHZX743A"
+  },
+  "serviceCode": "AWSLambda",
+  "terms": {
+    "OnDemand": {
+      "227MB7Z6QHZX743A.JRTCKXETXF": {
+        "priceDimensions": {
+          "227MB7Z6QHZX743A.JRTCKXETXF.6YS6EN2CT7": {
+            "unit": "Hours",
+            "endRange": "Inf",
+            "description": "$0.2142 per Hour for Lambda-Managed-Instances-c7i.8xlarge-Management-Hours in US East (N. Virginia)",
+            "appliesTo": [],
+            "rateCode": "227MB7Z6QHZX743A.JRTCKXETXF.6YS6EN2CT7",
+            "beginRange": "0",
+            "pricePerUnit": {
+              "USD": "0.2142000000"
+            }
+          }
+        },
+        "sku": "227MB7Z6QHZX743A",
+        "effectiveDate": "2026-09-01T00:00:00Z",
+        "offerTermCode": "JRTCKXETXF",
+        "termAttributes": {}
+      }
+    }
+  },
+  "version": "20261001184746",
+  "publicationDate": "2026-10-01T18:47:46Z"
+}

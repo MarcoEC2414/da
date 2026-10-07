@@ -1,0 +1,42 @@
+{
+  "product": {
+    "attributes": {
+      "regionCode": "us-gov-east-1",
+      "routingTarget": "AWS Infrastructure",
+      "servicecode": "AmazonRoute53",
+      "routingType": "Geoproximity",
+      "usagetype": "UGE1-Intra-AWS-Geo-Proximity-Queries",
+      "locationType": "AWS Region",
+      "location": "AWS GovCloud (US-East)",
+      "servicename": "Amazon Route 53",
+      "operation": ""
+    },
+    "sku": "22HS275CR7CASDVG"
+  },
+  "serviceCode": "AmazonRoute53",
+  "terms": {
+    "OnDemand": {
+      "22HS275CR7CASDVG.JRTCKXETXF": {
+        "priceDimensions": {
+          "22HS275CR7CASDVG.JRTCKXETXF.6YS6EN2CT7": {
+            "unit": "Queries",
+            "endRange": "Inf",
+            "description": "$0.00 per Query for UGE1-Intra-AWS-Geo-Proximity-Queries in AWS GovCloud (US-East)",
+            "appliesTo": [],
+            "rateCode": "22HS275CR7CASDVG.JRTCKXETXF.6YS6EN2CT7",
+            "beginRange": "0",
+            "pricePerUnit": {
+              "USD": "0.0000000000"
+            }
+          }
+        },
+        "sku": "22HS275CR7CASDVG",
+        "effectiveDate": "2026-08-01T00:00:00Z",
+        "offerTermCode": "JRTCKXETXF",
+        "termAttributes": {}
+      }
+    }
+  },
+  "version": "20260911124504",
+  "publicationDate": "2026-09-11T12:45:04Z"
+}

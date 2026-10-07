@@ -1,0 +1,6 @@
+[
+  { "id": "standard", "label": "Standard" },
+  { "id": "nearline", "label": "Nearline" },
+  { "id": "coldline", "label": "Coldline" },
+  { "id": "archive", "label": "Archive" }
+]

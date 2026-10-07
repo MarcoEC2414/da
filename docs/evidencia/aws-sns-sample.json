@@ -1,0 +1,42 @@
+{
+  "product": {
+    "attributes": {
+      "regionCode": "us-east-1",
+      "servicecode": "AmazonSNS",
+      "groupDescription": "Amazon SNS FIFO Payload Scanned & Filtered",
+      "usagetype": "F-PL-Filtered-Out",
+      "locationType": "AWS Region",
+      "location": "US East (N. Virginia)",
+      "servicename": "Amazon Simple Notification Service",
+      "operation": "",
+      "group": "SNS-FIFO-Payload-MessageFiltering-Filtered-Out"
+    },
+    "sku": "2KVK94JGJ4MPBBQG"
+  },
+  "serviceCode": "AmazonSNS",
+  "terms": {
+    "OnDemand": {
+      "2KVK94JGJ4MPBBQG.JRTCKXETXF": {
+        "priceDimensions": {
+          "2KVK94JGJ4MPBBQG.JRTCKXETXF.6YS6EN2CT7": {
+            "unit": "GB",
+            "endRange": "Inf",
+            "description": "$0.09 per GB for F-PL-Filtered-Out in US East (N. Virginia)",
+            "appliesTo": [],
+            "rateCode": "2KVK94JGJ4MPBBQG.JRTCKXETXF.6YS6EN2CT7",
+            "beginRange": "0",
+            "pricePerUnit": {
+              "USD": "0.0900000000"
+            }
+          }
+        },
+        "sku": "2KVK94JGJ4MPBBQG",
+        "effectiveDate": "2026-02-01T00:00:00Z",
+        "offerTermCode": "JRTCKXETXF",
+        "termAttributes": {}
+      }
+    }
+  },
+  "version": "20260915151944",
+  "publicationDate": "2026-09-15T15:19:44Z"
+}

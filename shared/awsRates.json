@@ -1,0 +1,116 @@
+{
+  "meta": {
+    "provider": "AWS",
+    "mode": "simulation",
+    "notice": "Simulación académica con tarifas de referencia aproximadas. No es una cotización de AWS.",
+    "referenceDate": "2026-10-07",
+    "sourceUrl": "https://aws.amazon.com/pricing/",
+    "approxNote": "Los precios de us-east-1 de EC2 (t3/m5) provienen de la página oficial de instancias T3 de AWS. Los demás valores son de referencia aproximada para fines académicos. Los factores por región son ajustes aproximados, no cifras oficiales."
+  },
+  "currency": "USD",
+  "fxRates": {
+    "USD": 1,
+    "EUR": 0.92,
+    "MXN": 18.2,
+    "PEN": 3.75
+  },
+  "regionFactor": {
+    "us-east-1": 1,
+    "us-east-2": 1,
+    "us-west-1": 1.06,
+    "us-west-2": 1,
+    "ca-central-1": 1.11,
+    "sa-east-1": 1.62,
+    "eu-west-1": 1.1,
+    "eu-west-2": 1.14,
+    "eu-west-3": 1.14,
+    "eu-central-1": 1.15,
+    "eu-central-2": 1.22,
+    "eu-north-1": 1.02,
+    "eu-south-1": 1.08,
+    "eu-south-2": 1.02,
+    "me-south-1": 1.12,
+    "me-central-1": 1.14,
+    "il-central-1": 1.08,
+    "af-south-1": 1.26,
+    "ap-east-1": 1.13,
+    "ap-south-1": 1.08,
+    "ap-south-2": 1.08,
+    "ap-northeast-1": 1.31,
+    "ap-northeast-2": 1.22,
+    "ap-northeast-3": 1.31,
+    "ap-southeast-1": 1.27,
+    "ap-southeast-2": 1.27,
+    "ap-southeast-3": 1.15,
+    "ap-southeast-4": 1.15
+  },
+  "ec2": {
+    "unitLabel": "USD/hora",
+    "monthlyHours": 730,
+    "osFactor": { "linux": 1, "windows": 1.1, "suse": 1.08 },
+    "sourceUrl": "https://aws.amazon.com/ec2/instance-types/t3/",
+    "types": [
+      { "id": "t3.nano", "label": "t3.nano", "vcpu": 2, "memoryGb": 0.5, "platformPrice": 0.0052 },
+      { "id": "t3.micro", "label": "t3.micro", "vcpu": 2, "memoryGb": 1, "platformPrice": 0.0104 },
+      { "id": "t3.small", "label": "t3.small", "vcpu": 2, "memoryGb": 2, "platformPrice": 0.0209 },
+      { "id": "t3.medium", "label": "t3.medium", "vcpu": 2, "memoryGb": 4, "platformPrice": 0.0418 },
+      { "id": "t3.large", "label": "t3.large", "vcpu": 2, "memoryGb": 8, "platformPrice": 0.0835 },
+      { "id": "m5.large", "label": "m5.large", "vcpu": 2, "memoryGb": 8, "platformPrice": 0.096 },
+      { "id": "m5.xlarge", "label": "m5.xlarge", "vcpu": 4, "memoryGb": 16, "platformPrice": 0.192 },
+      { "id": "m5.2xlarge", "label": "m5.2xlarge", "vcpu": 8, "memoryGb": 32, "platformPrice": 0.384 }
+    ]
+  },
+  "rds": {
+    "unitLabel": "USD/hora",
+    "monthlyHours": 730,
+    "engines": ["mysql", "postgresql"],
+    "multiAzFactor": 2,
+    "storagePerGbMonth": 0.115,
+    "sourceUrl": "https://aws.amazon.com/rds/pricing/",
+    "types": [
+      { "id": "db.t3.micro", "label": "db.t3.micro", "vcpu": 2, "memoryGb": 1, "price": 0.018 },
+      { "id": "db.t3.small", "label": "db.t3.small", "vcpu": 2, "memoryGb": 2, "price": 0.036 },
+      { "id": "db.t3.medium", "label": "db.t3.medium", "vcpu": 2, "memoryGb": 4, "price": 0.072 },
+      { "id": "db.m5.large", "label": "db.m5.large", "vcpu": 2, "memoryGb": 8, "price": 0.208 }
+    ]
+  },
+  "s3": {
+    "unitLabel": "USD/GB-mes",
+    "sourceUrl": "https://aws.amazon.com/s3/pricing/",
+    "classes": [
+      { "id": "standard", "label": "S3 Standard", "price": 0.023 },
+      { "id": "standard-ia", "label": "S3 Standard-IA", "price": 0.0125 },
+      { "id": "glacier", "label": "S3 Glacier Flexible Retrieval", "price": 0.0036 }
+    ]
+  },
+  "lambda": {
+    "unitLabel": "USD",
+    "sourceUrl": "https://aws.amazon.com/lambda/pricing/",
+    "requestPerMillion": 0.2,
+    "gbSecond": 0.0000166667,
+    "freeGbSeconds": 400000
+  },
+  "dynamodb": {
+    "unitLabel": "USD",
+    "sourceUrl": "https://aws.amazon.com/dynamodb/pricing/",
+    "storagePerGbMonth": 0.25,
+    "rcuPerHour": 0.000013,
+    "wcuPerHour": 0.000065
+  },
+  "sns": {
+    "unitLabel": "USD",
+    "sourceUrl": "https://aws.amazon.com/sns/pricing/",
+    "requestPerMillion": 0.5
+  },
+  "cloudfront": {
+    "unitLabel": "USD/GB",
+    "sourceUrl": "https://aws.amazon.com/cloudfront/pricing/",
+    "dataOutPerGb": 0.085
+  },
+  "route53": {
+    "unitLabel": "USD",
+    "sourceUrl": "https://aws.amazon.com/route53/pricing/",
+    "hostedZonePerMonth": 0.5,
+    "queryPerMillion": 0.4
+  }
+}

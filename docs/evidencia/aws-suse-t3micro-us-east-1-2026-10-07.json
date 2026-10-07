@@ -1,0 +1,22 @@
+{
+  "provider": "AWS",
+  "serviceCode": "AmazonEC2",
+  "operation": "GetProducts",
+  "filters": {
+    "instanceType": "t3.micro",
+    "location": "US East (N. Virginia)",
+    "operatingSystem": "SUSE",
+    "tenancy": "Shared",
+    "preInstalledSw": "NA",
+    "capacitystatus": "Used"
+  },
+  "verificationDate": "2026-10-07",
+  "note": "Producto devuelto por la API; el instante exacto no quedó registrado en este fichero. El SKU y precio se re-confirmaron en vivo a través del backend (retrievedAt real en docs/aws-pricing-integration.md).",
+  "result": {
+    "count": 1,
+    "sku": "BC2SFDXEPX53FCV2",
+    "pricePerUnit_Usd": "0.0104000000",
+    "unit": "Hrs"
+  },
+  "conclusion": "Existe un producto real de SUSE On-Demand para t3.micro en us-east-1 (0.0104 USD/h). No se necesita ningún mapeo simulado: SUSE se cotiza con su propio SKU."
+}

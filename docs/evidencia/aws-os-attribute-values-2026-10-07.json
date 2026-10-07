@@ -1,0 +1,12 @@
+{
+  "provider": "AWS",
+  "serviceCode": "AmazonEC2",
+  "attributeName": "operatingSystem",
+  "operation": "GetAttributeValues",
+  "endpoint": "us-east-1 (Pricing API)",
+  "verificationDate": "2026-10-07",
+  "note": "Valores obtenidos directamente de la API; el instante exacto de la consulta no quedó registrado en este fichero (ver respuestas E2E con retrievedAt en docs/aws-pricing-integration.md).",
+  "attributeValues": ["Linux", "NA", "RHEL", "Red Hat Enterprise Linux with HA", "SUSE", "Ubuntu Pro", "Windows"],
+  "hasSuse": true,
+  "conclusion": "El valor oficial del atributo operatingSystem para SUSE es literalmente 'SUSE'. Se conserva el selector 'SUSE Linux Enterprise' en la UI y se mapea a operatingSystem=SUSE en el filtro GetProducts."
+}
